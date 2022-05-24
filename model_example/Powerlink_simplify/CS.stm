@@ -1,0 +1,106 @@
+,DLL_CS_NON_CYCLIC,DLL_CS_WAIT_SOC,DLL_CS_WAIT_PREQ,DLL_CS_WAIT_SOA
+DLL_CE_SOC,/,"DLL_CE_SOC=False
+JUMP(2)","DLL_CEV_LOSS_SOA=True
+DLL_CE_SOC=False
+JUMP(2)","DLL_CEV_LOSS_SOA=True
+DLL_CE_SOC=False
+JUMP(2)"
+DLL_CE_PREQ,/,"if presNum!=1:
+	DLL_ME_PRES=True
+	DLL_CEV_LOSS_SOC=True
+	presNum=presNum+1
+	DLL_CE_PREQ=False
+elif presNum==1:
+	TIMEOUT_DLL_ME_PRES=True
+	DLL_CEV_LOSS_SOC=True
+	presNum=0
+	DLL_CE_PREQ=False
+JUMP(1)","if presNum!=1:
+	DLL_ME_PRES=True
+	presNum=presNum+1
+	DLL_CE_PREQ=False
+elif presNum==1:
+	TIMEOUT_DLL_ME_PRES=True
+	presNum=0
+	DLL_CE_PREQ=False
+JUMP(3)","if presNum!=1:
+	DLL_ME_PRES=True
+	DLL_CEV_LOSS_SOC=True
+	DLL_CEV_LOSS_SOA=True
+	presNum=presNum+1
+	DLL_CE_PREQ=False
+elif presNum==1:
+	TIMEOUT_DLL_ME_PRES=True
+	DLL_CEV_LOSS_SOC=True
+	DLL_CEV_LOSS_SOA=True
+	presNum=0
+	DLL_CE_PREQ=False
+JUMP(1)"
+DLL_CE_PRES,/,"DLL_CEV_LOSS_SOC=True
+DLL_CE_PRES=False
+JUMP(1)","presProcess=1
+DLL_CE_PRES=False
+JUMP(2)","presProcess=1
+DLL_CE_PRES=False
+JUMP(3)"
+DLL_CE_SOA,/,"DLL_CEV_LOSS_SOC=True
+DLL_CE_SOA=False
+SoAProcess=1
+JUMP(1)","if multiplexed_1==1 and SoAAuthorization==1:
+	DLL_ME_ASND=True
+	SoAProcess=1
+	DLL_CE_SOA=False
+elif multiplexed_1==1 and SoAAuthorization!=1:
+	DLL_CE_SOA=False
+	SoAProcess=1
+elif multiplexed_1==0 and SoAAuthorization==1:
+	DLL_CEV_LOSS_PREQ=True
+	DLL_ME_ASND=True
+	DLL_CE_SOA=False
+	SoAProcess=1
+elif multiplexed_1==0 and SoAAuthorization!=1:
+	DLL_CEV_LOSS_PREQ=True
+	DLL_CE_SOA=False
+	SoAProcess=1
+JUMP(1)","if SoAAuthorization==1:
+	DLL_ME_ASND=True
+	SoAProcess=1
+	DLL_CE_SOA=False
+else:
+	SoAProcess=1
+	DLL_CE_SOA=False
+JUMP(1)"
+DLL_CE_ASND,/,"asndProcess=1
+DLL_CE_ASND=False
+JUMP(1)","DLL_CEV_LOSS_SOA=True
+DLL_CE_ASND=False
+JUMP(2)","DLL_CEV_LOSS_SOA=True
+DLL_CE_ASND=False
+JUMP(3)"
+TIMEOUT_DLL_CE_SOC,/,"if NMT_CST_1!=3:
+	DLL_CEV_LOSS_SOC=True
+	TIMEOUT_DLL_CE_SOC=False
+else:
+	TIMEOUT_DLL_CE_SOC=False
+JUMP(1)","if NMT_CST_1!=3:
+	DLL_CEV_LOSS_SOC=True
+	DLL_CEV_LOSS_SOA=True
+	flag=1
+	TIMEOUT_DLL_CE_SOC=False
+else:
+	TIMEOUT_DLL_CE_SOC=False
+	flag=1
+JUMP(1)","if NMT_CST_1!=3:
+	DLL_CEV_LOSS_SOC=True
+	DLL_CEV_LOSS_SOA=True
+	TIMEOUT_DLL_CE_SOC=False
+else:
+	TIMEOUT_DLL_CE_SOC=False
+	flag=1
+JUMP(1)"
+DLL_CT11_1,"DLL_CT11_1=False
+JUMP(1)",X,X,X
+DLL_CE_RESET,/,"DLL_CE_RESET=False
+JUMP(0)","DLL_CE_RESET=False
+JUMP(0)","DLL_CE_RESET=False
+JUMP(0)"

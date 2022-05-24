@@ -1,0 +1,207 @@
+,DLL_MS_NON_CYCLIC,DLL_MS_WAIT_SOC_TRIG,DLL_MS_WAIT_PRES,DLL_MS_WAIT_ASND
+DLL_ME_PRES,/,"sendToNMT=1
+Timer=Timer+1
+time_DLL_ME_PRES_False=Timer
+DLL_ME_PRES=False
+JUMP(1)","if isochr!=0:
+	DLL_ME_PRES=False
+	isochr=isochr-1
+	Timer=Timer+1
+	time_DLL_ME_PRES_False=Timer
+	error=1
+	JUMP(2)
+elif isochr==0 and async_in!=0 and isochr_out!=0:
+	Timer=Timer+3
+	DLL_CE_PRES=True
+	DLL_CE_SOA=True
+	time_DLL_CE_PRES=Timer-1
+	time_DLL_CE_SOA=Timer
+	SoAAuthorization=1
+	isochr=1
+	time_DLL_ME_PRES_False=Timer
+	DLL_ME_PRES=False
+	JUMP(3)
+elif isochr==0 and async_in!=0 and isochr_out==0:
+	Timer=Timer+2
+	DLL_CE_SOA=True
+	time_DLL_CE_SOA=Timer
+	SoAAuthorization=1
+	isochr=1
+	time_DLL_ME_PRES_False=Timer
+	DLL_ME_PRES=False
+	JUMP(3)
+elif isochr==0 and async_in==0 and isochr_out!=0 and async_out!=0:
+	Timer=Timer+4
+	DLL_CE_PRES=True
+	DLL_CE_SOA=True
+	time_DLL_CE_PRES=Timer-2
+	time_DLL_CE_SOA=Timer-1
+	SoAAuthorization=0
+	DLL_CE_ASND=True
+	time_DLL_CE_ASND=Timer
+	isochr=1
+	time_DLL_ME_PRES_False=Timer
+	DLL_ME_PRES=False
+	JUMP(1)
+elif isochr==0 and async_in==0 and isochr_out!=0 and async_out==0:
+	Timer=Timer+3
+	DLL_CE_PRES=True
+	DLL_CE_SOA=True
+	time_DLL_CE_PRES=Timer-1
+	time_DLL_CE_SOA=Timer
+	SoAAuthorization=0
+	isochr=1
+	time_DLL_ME_PRES_False=Timer
+	DLL_ME_PRES=False
+	JUMP(1)
+elif isochr==0 and async_in==0 and isochr_out==0 and async_out!=0:
+	Timer=Timer+3
+	DLL_CE_SOA=True
+	time_DLL_CE_SOA=Timer-1
+	SoAAuthorization=0
+	DLL_CE_ASND=True
+	time_DLL_CE_ASND=Timer
+	isochr=1
+	time_DLL_ME_PRES_False=Timer
+	DLL_ME_PRES=False
+	JUMP(1)
+elif isochr==0 and async_in==0 and isochr_out==0 and async_out==0:
+	Timer=Timer+2
+	DLL_CE_SOA=True
+	time_DLL_CE_SOA=Timer
+	SoAAuthorization=0
+	isochr=1
+	time_DLL_ME_PRES_False=Timer
+	DLL_ME_PRES=False
+	JUMP(1)","sendToNMT=1
+Timer=Timer+1
+time_DLL_ME_PRES_False=Timer
+DLL_ME_PRES=False
+JUMP(1)"
+TIMEOUT_DLL_ME_PRES,/,/,"if isochr!=0:
+	TIMEOUT_DLL_ME_PRES=False
+	DLL_MEV_LOSS_PRES=True
+	isochr=isochr-1
+	Timer=Timer+1
+	time_TIMEOUT_DLL_ME_PRES_False=Timer
+	error=1
+	JUMP(2)
+elif isochr==0 and async_in!=0 and isochr_out!=0:
+	Timer=Timer+3
+	DLL_CE_PRES=True
+	DLL_CE_SOA=True
+	time_DLL_CE_PRES=Timer-1
+	time_DLL_CE_SOA=Timer
+	SoAAuthorization=1
+	DLL_MEV_LOSS_PRES=True
+	isochr=1
+	time_TIMEOUT_DLL_ME_PRES_False=Timer
+	TIMEOUT_DLL_ME_PRES=False
+	JUMP(3)
+elif isochr==0 and async_in!=0 and isochr_out==0:
+	Timer=Timer+2
+	DLL_CE_SOA=True
+	time_DLL_CE_SOA=Timer
+	SoAAuthorization=1
+	DLL_MEV_LOSS_PRES=True
+	isochr=1
+	time_TIMEOUT_DLL_ME_PRES_False=Timer
+	TIMEOUT_DLL_ME_PRES=False
+	JUMP(3)
+elif isochr==0 and async_in==0 and isochr_out!=0 and async_out!=0:
+	Timer=Timer+4
+	DLL_CE_PRES=True
+	DLL_CE_SOA=True
+	time_DLL_CE_PRES=Timer-2
+	time_DLL_CE_SOA=Timer-1
+	SoAAuthorization=0
+	DLL_CE_ASND=True
+	time_DLL_CE_ASND=Timer
+	DLL_MEV_LOSS_PRES=True
+	isochr=1
+	time_TIMEOUT_DLL_ME_PRES_False=Timer
+	TIMEOUT_DLL_ME_PRES=False
+	JUMP(1)
+elif isochr==0 and async_in==0 and isochr_out!=0 and async_out==0:
+	Timer=Timer+3
+	DLL_CE_PRES=True
+	DLL_CE_SOA=True
+	time_DLL_CE_PRES=Timer-1
+	time_DLL_CE_SOA=Timer
+	SoAAuthorization=0
+	DLL_MEV_LOSS_PRES=True
+	isochr=1
+	time_TIMEOUT_DLL_ME_PRES_False=Timer
+	TIMEOUT_DLL_ME_PRES=False
+	JUMP(1)
+elif isochr==0 and async_in==0 and isochr_out==0 and async_out!=0:
+	Timer=Timer+3
+	DLL_CE_SOA=True
+	time_DLL_CE_SOA=Timer-1
+	SoAAuthorization=0
+	DLL_CE_ASND=True
+	time_DLL_CE_ASND=Timer
+	DLL_MEV_LOSS_PRES=True
+	isochr=1
+	time_TIMEOUT_DLL_ME_PRES_False=Timer
+	TIMEOUT_DLL_ME_PRES=False
+	JUMP(1)
+elif isochr==0 and async_in==0 and isochr_out==0 and async_out==0:
+	Timer=Timer+2
+	DLL_CE_SOA=True
+	time_DLL_CE_SOA=Timer
+	SoAAuthorization=0
+	DLL_MEV_LOSS_PRES=True
+	isochr=1
+	time_TIMEOUT_DLL_ME_PRES_False=Timer
+	TIMEOUT_DLL_ME_PRES=False
+	JUMP(1)",/
+DLL_ME_ASND,/,/,X,"asndProcess=1
+Timer=Timer+2
+time_DLL_ME_ASND_False=Timer
+DLL_ME_ASND=False
+JUMP(3)"
+xDLL_ME_SOC_TRIG,"if DLL_MS_CAN_OP==1:
+	JUMP(1)
+else:
+	JUMP(0)","if isochr==1 and SoAProcess==1:
+	time_launch=Timer
+	Timer=Timer+2
+	DLL_CE_SOC=True
+	DLL_CE_PREQ=True
+	time_DLL_CE_SOC=Timer-1
+	time_DLL_CE_PREQ=Timer
+	SoAProcess=0
+	isochr=isochr-1
+	xDLL_ME_SOC_TRIG=False
+	JUMP(2)","if SoAProcess==1:
+	DLL_CEV_CYCLE_EXCEED=True
+	time_launch=Timer
+	Timer=Timer+1
+	xDLL_ME_SOC_TRIG=False
+	JUMP(2)","if isochr==0 and SoAProcess==1:
+	time_launch=Timer
+	Timer=Timer+3
+	DLL_CE_SOC=True
+	DLL_CE_SOA=True
+	time_DLL_CE_SOC=Timer-1
+	time_DLL_CE_SOA=Timer
+	isochr=1
+	SoAProcess=0
+	xDLL_ME_SOC_TRIG=False
+	JUMP(3)
+elif isochr!=0 and SoAProcess==1:
+	time_launch=Timer
+	Timer=Timer+3
+	DLL_CE_SOC=True
+	DLL_CE_PREQ=True
+	time_DLL_CE_SOC=Timer-1
+	time_DLL_CE_PREQ=Timer
+	isochr=isochr-1
+	SoAProcess=0
+	xDLL_ME_SOC_TRIG=False
+	JUMP(2)"
+DLL_ME_OP_RESET,/,"DLL_ME_OP_RESET=False
+JUMP(0)","DLL_ME_OP_RESET=False
+JUMP(0)","DLL_ME_OP_RESET=False
+JUMP(0)"

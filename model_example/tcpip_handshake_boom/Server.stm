@@ -1,0 +1,20 @@
+,CLOSED,LISTEN,SYN_RECVD,ESTABLISHED
+Server_START,"Server_FINISH=False
+Server_START=False
+Server_LISTEN=True
+JUMP(1)",/,/,/
+Server_LISTEN,X,"if Client_SYN==1:
+	Server_SEND_ACK=True
+	Server_LISTEN=False
+	JUMP(2)","if Client_ACK==1:
+	JUMP(3)","if Client_FINISH :
+	Server_LISTEN=False
+	Server_FINISH=True
+	JUMP(0)"
+Server_SEND_ACK,X,/,"Server_ACK=1
+Server_SYN=1
+Server_seq=Server_seq+5
+Server_ack=Client_seq+1
+Server_SEND_ACK=False
+Server_LISTEN=True
+JUMP(2)",/

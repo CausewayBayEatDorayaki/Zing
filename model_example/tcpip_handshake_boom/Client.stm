@@ -1,0 +1,22 @@
+,CLOSED,SYN_SENT,ESTABLISHED
+Client_START_AND_SEND_SYN,"Client_FINISH=False
+Server_START=True
+Client_SYN=1
+Client_START_AND_SEND_SYN=False
+Client_LISTEN=True
+JUMP(1)",/,/
+Client_LISTEN,X,"if Server_ACK==1:
+	Client_LISTEN=False
+	Client_SEND_ACK=True
+	JUMP(1)","if Server_FINISH :
+	Client_LISTEN=False
+	Client_START_AND_SEND_SYN=True
+	Client_seq=Client_seq+500
+	JUMP(0)"
+Client_SEND_ACK,X,"Client_ACK=1
+Client_seq=Client_seq+1
+Client_ack=Server_ack+1
+Client_LISTEN=True
+Client_SEND_ACK=False
+Client_FINISH=True
+JUMP(2)",/
