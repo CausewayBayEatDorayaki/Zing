@@ -1,7 +1,8 @@
 # Zing
 # Environment
-python version: 3.6.13
-pip install -r requirements.txt
+Python Version: 3.6.13
+
+Installing Dependencies: pip install -r requirements.txt
 # Run app
 cd ./view
 python apploader.py
